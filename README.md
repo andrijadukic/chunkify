@@ -8,6 +8,7 @@ channel of type Chunk, which contains only the starting and the ending index of 
 
 ```  go
 
+...
 chunker, err := chunkify.NewChunker(len(collection), chunkSize)
 if err != nil {
     fmt.Println(err)
@@ -15,5 +16,6 @@ if err != nil {
 for chunk := range chunker.Chunks() {
     process(chunk)
 }
+...
 
 ```
