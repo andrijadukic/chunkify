@@ -1,6 +1,8 @@
 package chunkify
 
-import "errors"
+import (
+	"errors"
+)
 
 // Represents a type which returns a receive-only channel of Chunk instances.
 type Chunker interface {
@@ -35,10 +37,10 @@ func NewChunker(collectionSize, chunkSize int) (Chunker, error) {
 	return &chunker{collectionSize: collectionSize, chunkSize: chunkSize}, nil
 }
 
-// Returns a buffered channel of chunks of anything indexable.
+// Returns a buffered channel of chunks of an indexable collection.
 // Consecutive chunks are sent to the channel, each of which is the same size.
-// The final chunk may be smaller than the others which also means that if given chunk size is grater than the size of
-// the collection, the chunk returned includes the entire collection.
+// The final chunk may be smaller than the others which also means that if the given chunk size is greater than
+// the size of the collection, the chunk returned includes the entire collection.
 // The returned channel is a buffered receive-only channel. The buffer size is set to the total number of chunks that
 // will be created so as to prevent blocking.
 func (c *chunker) Chunks() <-chan Chunk {

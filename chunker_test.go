@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestChunks(t *testing.T) {
+func TestChunker(t *testing.T) {
 	var cases = []struct {
 		collectionSize int
 		chunkSize      int
@@ -34,7 +34,7 @@ func TestChunks(t *testing.T) {
 }
 
 func BenchmarkLargeCollection(b *testing.B) {
-	chunker, err := NewChunker(1e8, 50)
+	chunker, err := NewChunker(1e8, 42)
 	if err != nil {
 		b.Errorf(err.Error())
 	}
@@ -42,7 +42,7 @@ func BenchmarkLargeCollection(b *testing.B) {
 }
 
 func BenchmarkMediumCollection(b *testing.B) {
-	chunker, err := NewChunker(1e4, 50)
+	chunker, err := NewChunker(1e4, 42)
 	if err != nil {
 		b.Errorf(err.Error())
 	}
@@ -50,7 +50,7 @@ func BenchmarkMediumCollection(b *testing.B) {
 }
 
 func BenchmarkSmallCollection(b *testing.B) {
-	chunker, err := NewChunker(1e2, 50)
+	chunker, err := NewChunker(1e2, 42)
 	if err != nil {
 		b.Errorf(err.Error())
 	}
