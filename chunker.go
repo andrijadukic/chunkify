@@ -29,10 +29,10 @@ type chunker struct {
 // Returns an error if given chunkSize or collectionSIze argument is not a positive integer.
 func NewChunker(collectionSize, chunkSize int) (Chunker, error) {
 	if chunkSize <= 0 {
-		return &chunker{0, 0}, errors.New("chunk size must be a positive integer")
+		return nil, errors.New("chunk size must be a positive integer")
 	}
 	if collectionSize <= 0 {
-		return &chunker{0, 0}, errors.New("collection size must be a positive integer")
+		return nil, errors.New("collection size must be a positive integer")
 	}
 	return &chunker{collectionSize: collectionSize, chunkSize: chunkSize}, nil
 }
@@ -42,7 +42,7 @@ func NewChunker(collectionSize, chunkSize int) (Chunker, error) {
 // The final chunk may be smaller than the others which also means that if the given chunk size is greater than
 // the size of the collection, the chunk returned includes the entire collection.
 // The returned channel is a buffered receive-only channel. The buffer size is set to the total number of chunks that
-// will be created so as to prevent blocking.
+// will be created so as to prevent unnecessary blocking.
 func (c *chunker) Chunks() <-chan Chunk {
 	fullChunks := c.collectionSize / c.chunkSize
 	totalChunks := fullChunks
