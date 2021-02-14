@@ -1,4 +1,4 @@
-# gochunkify
+# chunkify
 
 A simple package for collection partitioning in go. Since go does not have generics, this package does not produce
 chunks of the given collection directly, rather it assumes the collection supports random access, so it returns a
